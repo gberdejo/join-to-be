@@ -5,6 +5,7 @@ import { logger } from './log/index';
 
 connectionDb()
   .then(() => {
+    logger.info('Database connected');
     App.getInstance(get('port')).run();
   })
   .catch((err) => {

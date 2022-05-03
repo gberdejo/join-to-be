@@ -1,12 +1,12 @@
-import express from 'express';
+import express, { Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { logger } from './log/index';
 import allRoutes from './controllers';
-import { logErrors } from './utils/handlerError';
+import { logErrors, clientErrorHandler } from './utils/handlerError';
 
 export default class App {
-  private app: express.Application;
+  private app: Application;
 
   private static instance: App;
 
@@ -18,6 +18,7 @@ export default class App {
     this.middlewares();
     this.routes();
     this.errors();
+    this.app.use(allRoutes);
   }
 
   static getInstance(port: string) {
@@ -31,13 +32,11 @@ export default class App {
 
   errors() {
     this.app.use(logErrors);
-    // this.app.use(clientErrorHandler);
+    this.app.use(clientErrorHandler);
   }
 
   middlewares() {
-    this.app.use(express.json());
-    this.app.use(cors());
-    this.app.use(morgan('dev'));
+    this.app.use(express.json()).use(cors()).use(morgan('dev'));
   }
 
   run() {

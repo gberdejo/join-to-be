@@ -8,7 +8,7 @@ export const logErrors = (
   next: NextFunction,
 ) => {
   logger.error(`[${err.name}: ${err.message}]`);
-  //   logger.error(err.stack);
+  logger.error(err.stack);
   next(err);
 };
 

@@ -22,5 +22,9 @@ class User {
   //   owner: Ref<User>;
 }
 
-const ModelUser = getModelForClass(User);
-export default ModelUser;
+export const ModelUser = getModelForClass(User, {
+  schemaOptions: {
+    timestamps: true,
+    collection: 'user',
+  },
+});
