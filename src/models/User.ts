@@ -1,13 +1,20 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 import { nanoid } from 'nanoid';
-import { Hobby } from './Hobby';
 
-class User {
+export class Hobby {
+  @prop({ type: String })
+  name: string;
+
+  @prop({ type: String, default: () => nanoid() })
+  sku?: string;
+}
+
+export class User {
   @prop({ type: String, required: true, trim: true })
   name: string;
 
   @prop({ type: String, default: () => nanoid() })
-  sku: string;
+  sku?: string;
 
   @prop({ type: Number, required: true })
   age: number;

@@ -23,6 +23,7 @@
             "error",{
                 "endOfLine": "auto"
             }
-        ]
+        ],
+        "max-classes-per-file": "off"
     }
 }

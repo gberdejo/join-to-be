@@ -7,7 +7,7 @@ import { ModelUser } from '../models/User';
 const router = Router();
 
 export default router.get(
-  '/',
+  '/users',
   joiValidation(
     Joi.object({
       // name: Joi.string().required(),
@@ -15,20 +15,7 @@ export default router.get(
     }),
   ),
   async (req: Request, res: Response) => {
-    const user = new ModelUser({
-      name: 'John Doe',
-      age: 20,
-      friend: ['John', 'Jane'],
-      hobby: [
-        {
-          name: 'Hobby 1',
-        },
-        {
-          name: 'Hobby 2',
-        },
-      ],
-    });
-    await user.save();
+    const user = await ModelUser.find();
     res.status(200).json(user);
   },
 );
